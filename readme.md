@@ -1,10 +1,12 @@
 # Requirements
-- Docker: 
-  - Docker Desktop. Minimum Supported Version: 4.3.1 (72247)
-  - 4 GB memory and 2 CPUs
-  - Docker Compose (included in Docker Desktop)
-  - Kubernetes is installed and running (a new installation of Docker Desktop might need to have Kubernetes enabled in its **Settings**).
-- Github account.
+- Harness: 
+  - Docker Desktop minimum version 4.3.1 (72247)
+    - 4 GB memory and 2 CPUs
+    - Docker Compose (included in Docker Desktop)
+    - Kubernetes is installed and running (a new installation of Docker Desktop might need to have Kubernetes enabled in its **Settings**).
+- Quickstart:
+  - Github account.
+  - Minikube minimum version v1.22.0 installed locally.
 
 # Architecture Summary
 
@@ -55,7 +57,7 @@ You're now using Harness!
 
 The next section walks you through setting up and running a simple CD Pipeline using a public manifest and Docker image.
 
-# Create and Run a CD Pipeline
+# CD Pipeline Quickstart
 :clock9: 10m
 
 1. In Harness, click **Projects**.
@@ -77,5 +79,48 @@ The new stage appears. Now we'll set up the Service, Infrastructure, and Executi
 14. In **Manifests**, click **Add Manifest**.
 15. Select **K8s Manifest**, and click **Continue**.
 16. In **Select K8sManifest Store**, click **GitHub**, and then click **New GitHub Connector**.
+17. The Git Connector settings appear. Enter the following settings.
+- **Name:** enter a name for the Connector.
+- **URL Type:** select Repository.
+- **Connection Type:** select HTTP.
+- **Git Repository URL:** enter https://github.com/kubernetes/website.
+- Username and password: Enter the username and password for your Github account. You'll have to create a Harness secret for the password.
+18. Click **Continue**.
+19. In **Set Up Delegates**, click **Install new Delegate**. The Delegate wizard appears.
+20. Click **Kubernetes**, and then click **Continue**.
+21. Enter a name for the Delegate, like **quickstart**, click the **Laptop** size.
+22. Click Continue.
+23. Click Download Script. The YAML file for the Kubernetes Delegate will download to your computer as an archive.
+24. Open a terminal and navigate to where the Delegate file is downloaded.
+25. Start minkube if it is not already started: `minikube start`. We'll use the `default` namespace for our deployment, but you can use another existing namespace.
+26. Next, install the Harness Delegate using the `harness-delegate.yaml` file you just downloaded. In the terminal running minikube, run this command (you can see this command in the Delegate wizard):
 
+```
+kubectl apply -f harness-delegate.yaml
+```
+The successful output is something like this:
+```
+% kubectl apply -f harness-delegate.yaml
+namespace/harness-delegate unchanged
+clusterrolebinding.rbac.authorization.k8s.io/harness-delegate-cluster-admin unchanged
+secret/k8s-quickstart-proxy unchanged
+statefulset.apps/k8s-quickstart-sngxpn created
+service/delegate-service unchanged
+```
+27. In Harness, click **Verify**. It will take a few minutes to verify the Delegate. Once it is verified, close the wizard.
+28. Back in **Set Up Delegates**, you can select the new Delegate.
+29. In the list of Delegates, select the **Connect using Delegates with the following Tags** option.
+30. Enter the tag of the new Delegate and click **Save and Continue**. When you are done, the Connector is tested. 
+31. Click **Continue**.
+32. In **Manifest Details**, enter the following settings:
 
+- **Manifest Identifier:** enter nginx.
+- **Git Fetch Type:** select **Latest from Branch**.
+- Branch: enter main.
+- File/Folder path: `content/en/examples/application/nginx-app.yaml` This is the path from the repo root.
+33. Test the connection and click **Submit**. The manifest is now listed.
+34. Click **Next** at the bottom of the **Service** tab. Now that the artifact and manifest are defined, you can define the target cluster for your deployment.
+35. In **Infrastructure Details**, in **Specify your environment**, click **New Environment**.
+36. In **New Environment**, enter a name such as **quickstart**, select **Non-Production**, and click **Save**. The new Environment appears.
+37. In **Infrastructure Definition**, click **Kubernetes**.
+38. 
