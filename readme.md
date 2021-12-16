@@ -1,9 +1,10 @@
 # Requirements
-Docker: 
-- Minimum Supported Version: 4.3.1
-- 4 GB memory and 2 CPUs
-- Docker Compose
-- Kubernetes is installed and running (a new installation of Docker Desktop might need to have Kubernetes enabled in Settings.
+- Docker: 
+  - Docker Desktop. Minimum Supported Version: 4.3.1 (72247)
+  - 4 GB memory and 2 CPUs
+  - Docker Compose (included in Docker Desktop)
+  - Kubernetes is installed and running (a new installation of Docker Desktop might need to have Kubernetes enabled in its **Settings**).
+- Github account.
 
 # Architecture Summary
 
@@ -62,4 +63,19 @@ The next section walks you through setting up and running a simple CD Pipeline u
 3. In **About the Project**, in **Name**, enter **quickstart**, and then click **Save and Continue**.
 4. In **Invite Collaborators**, click **Save and Continue**.
 Your new project appears. Let's add a CD Pipeline.
-5. 
+5. Click the new project.
+6. In **Modules**, click **Continuous Delivery**.
+7. Click **Create a Pipeline**.
+8. In **Create new Pipeline**, enter the name **quickstart**, and then click **Start**.
+Your new Pipeline is started! Let's add a CD stage.
+9. Click **Add Stage**.
+10. In **Select stage type**, click **Deploy**.
+11. In **Stage Name**, enter **deploy**, and then click **Set Up Stage**.
+The new stage appears. Now we'll set up the Service, Infrastructure, and Execution for the stage.
+12. In **Specify Service**, click **New Service**.
+13. In **New Service**, enter the name **nginx**, and then click **Save**.
+14. In **Manifests**, click **Add Manifest**.
+15. Select **K8s Manifest**, and click **Continue**.
+16. In **Select K8sManifest Store**, click **GitHub**, and then click **New GitHub Connector**.
+
+
