@@ -89,8 +89,8 @@ The new stage appears. Now we'll set up the Service, Infrastructure, and Executi
 19. In **Set Up Delegates**, click **Install new Delegate**. The Delegate wizard appears.
 20. Click **Kubernetes**, and then click **Continue**.
 21. Enter a name for the Delegate, like **quickstart**, click the **Laptop** size.
-22. Click Continue.
-23. Click Download Script. The YAML file for the Kubernetes Delegate will download to your computer as an archive.
+22. Click **Continue**.
+23. Click **Download Script**. The YAML file for the Kubernetes Delegate will download to your computer as an archive.
 24. Open a terminal and navigate to where the Delegate file is downloaded.
 25. Start minkube if it is not already started: `minikube start`. We'll use the `default` namespace for our deployment, but you can use another existing namespace.
 26. Next, install the Harness Delegate using the `harness-delegate.yaml` file you just downloaded. In the terminal running minikube, run this command (you can see this command in the Delegate wizard):
@@ -123,4 +123,18 @@ service/delegate-service unchanged
 35. In **Infrastructure Details**, in **Specify your environment**, click **New Environment**.
 36. In **New Environment**, enter a name such as **quickstart**, select **Non-Production**, and click **Save**. The new Environment appears.
 37. In **Infrastructure Definition**, click **Kubernetes**.
-38. 
+38. In **Cluster details**, in **Connector**, click **Select a connector**.
+39. Click **New Connector**. The Kubernetes Cluster Connector appears.
+40. In **Kubernetes Cluster Connector**, enter a name like **quickstart** and click **Continue**.
+41. In **Details**, select **Use the credentials of a specific Harness Delegate**. We will select the Delegate next. Click **Continue**.
+42. Select the Kubernetes Delegate you added earlier using its Tags, and then click **Save and Continue**. Harness verifies the Connector.
+43. Click **Finish**.
+44. Select the new Connector and then click **Apply Selected**.
+45. Back in **Cluster Details**, in **Namespace**, enter the target namespace for the deployment. For example, `default`. You can use any namespace in your target cluster.
+
+The target infrastructure is complete. Now we can add our stage steps.
+
+46. Click **Next** to move onto **Execution**. 
+47. 
+
+
